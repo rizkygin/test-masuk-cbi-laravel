@@ -32,8 +32,6 @@ export function NavFooter({
                                 <Link
                                     href={item.href}
                                     method='get'
-                                    preserveState={true}
-                                    preserveScroll={true}
                                 >
                                     {item.icon && (
                                         <item.icon className="h-5 w-5" />

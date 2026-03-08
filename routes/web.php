@@ -11,6 +11,9 @@ Route::inertia('/', 'welcome', [
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
     Route::get('karyawan', [KaryawanController::class , 'index'])->name('karyawan');
+    Route::get('karyawan/{id}', [KaryawanController::class , 'show'])->name('karyawan.show');
+    Route::put('karyawan/{id}', [KaryawanController::class , 'update'])->name('karyawan.update');
+    Route::delete('karyawan/{id}', [KaryawanController::class , 'destroy'])->name('karyawan.destroy');
     Route::inertia('departemen', 'departemen')->name('departemen');
 });
 

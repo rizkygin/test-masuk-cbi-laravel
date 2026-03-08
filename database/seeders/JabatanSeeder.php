@@ -14,7 +14,7 @@ class JabatanSeeder extends Seeder
     public function run(): void
     {
         Jabatan::create([
-            'name' => 'Programmer'
+            'nama' => 'Programmer'
         ]);
     }
 }

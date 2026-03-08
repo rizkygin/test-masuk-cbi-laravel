@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdatekaryawanRequest extends FormRequest
 {
@@ -11,7 +12,8 @@ class UpdatekaryawanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // dd(Auth()->user()->email);
+        return Auth()->user()->email === "rizkygin@gmail.com";
     }
 
     /**
