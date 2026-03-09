@@ -16,8 +16,13 @@ class IzinFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
-            //
+            'karyawan_id' => fake()->numberBetween(1, 100),
+            'tanggal' => fake()->date,
+            'keterangan' => fake()->realText(100),
+            'alasan' => fake()->randomElement(['izin', 'sakit', 'cuti']),
+            'status' => fake()->randomElement(['pending', 'approved', 'rejected']),
         ];
     }
 }

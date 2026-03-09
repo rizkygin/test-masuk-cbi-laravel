@@ -3,10 +3,12 @@
 namespace Database\Seeders;
 
 // use App\Models\Departemen;
+use App\Models\Izin;
 use App\Models\karyawan;
 use Database\Seeders\DepartemenSeeder;
 use Database\Seeders\JabatanSeeder;
 use App\Models\User;
+use App\Models\Absen;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -53,6 +55,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         karyawan::factory()->count(100)->create();
+
+        Izin::factory()->count(200)->create();
+        Absen::factory()->count(200)->create();
 
     }
 }

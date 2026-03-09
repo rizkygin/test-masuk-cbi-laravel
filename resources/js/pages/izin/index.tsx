@@ -25,7 +25,7 @@ export default function KaryawanIndex({ izin }: { izin: izin[] }) {
             <Head title="Karyawan" />
             <div className="container mx-auto px-10">
                 <div className="flex justify-between">
-                    <h1 className="text-2xl font-bold mb-4">Karyawan</h1>
+                    <h1 className="text-2xl font-bold mb-4">Riwayat Izin</h1>
                     {/* <a href={KaryawanController.create.url()}><Button>Tambah Karyawan</Button></a> */}
                 </div>
                 <DataTable columns={columns} data={data} />
