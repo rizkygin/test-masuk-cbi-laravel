@@ -17,7 +17,7 @@ class DashboardController extends Controller
 
         $data['karyawan'] = karyawan::all()->count();
         $data['user'] = User::all()->count();
-
+        // dd($data['user']);
         $dataIzinPending = Izin::all()->where('status', 'pending')->where('tanggal', date('Y-m-d'));
         $data['izin'] = $dataIzinPending->count();
         $data['dataIzin'] = [];

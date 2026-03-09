@@ -9,10 +9,12 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartemenController;
 use App\Http\Controllers\JabatanController;
 
+use Illuminate\Http\Request;
+
 
 Route::inertia('/', 'welcome', [
     'canRegister' => Features::enabled(Features::registration()),
-])->name('home');
+])->name('home')->middleware('auth:sanctum');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class , 'index'])->name('dashboard');
@@ -54,6 +56,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('izinTidakMasuk/{izin}/update/', [IzinController::class , 'update'])->name('izinTidakMasukUpdate');
 
 })->middleware('employee_reguler');
+
+Route::post('/tokens/create', function (Request $request) {
+    $token = $request->user()->createToken($request->token_name);
+
+    return ['token' => $token->plainTextToken];
+})->name('requestToken');
 
 
 
