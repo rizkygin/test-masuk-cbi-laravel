@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 export type karyawans = {
-    id: string,
+    id: number,
     nama: string,
     jabatan: string,
     departemen: string
@@ -84,7 +84,7 @@ export const columns: ColumnDef<karyawans>[] = [
         header: "Aksi",
         cell: ({ row }) => {
             const karyawan = row.original
-            console.log(karyawan);
+            // console.log(karyawan);
 
             return (
                 <DropdownMenu>
@@ -102,16 +102,16 @@ export const columns: ColumnDef<karyawans>[] = [
                             Copy Nama Karyawan
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem><Link href={show.url(karyawan)}>View Karyawan</Link></DropdownMenuItem>
+                        <DropdownMenuItem><Link href={show.url(karyawan.id)}>View Karyawan</Link></DropdownMenuItem>
                         <DropdownMenuItem>
-                            <Form {...KaryawanController.destroy.form(karyawan.id)}
+                            <Form action={KaryawanController.destroy(karyawan.id)}
                             >
                                 <Button type="submit">Delete Karyawan</Button>
                             </Form>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
 
-                </DropdownMenu>
+                </DropdownMenu >
             )
         },
     },

@@ -11,7 +11,7 @@ class UpdateDepartemenRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth()->user()->role === 'admin';
     }
 
     /**

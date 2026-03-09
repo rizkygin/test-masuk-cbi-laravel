@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,10 @@ class KaryawanFactory extends Factory
      */
     public function definition(): array
     {
+        $user = User::factory()->create();
         return [
             'nama' => fake()->name(),
+            'user_id' => $user->id,
             'departemen_id' => 1,
             'jabatan_id' => 1,
         ];

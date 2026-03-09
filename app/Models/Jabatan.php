@@ -10,6 +10,7 @@ class Jabatan extends Model
     /** @use HasFactory<\Database\Factories\JabatanFactory> */
     use HasFactory;
 
+    protected $table = 'jabatans';
     protected $fillable = [
         'nama'
     ];

@@ -15,8 +15,9 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(karyawan::class)->constrained()->cascadeOnDelete();
             $table->date('tanggal');
-            $table->time('jam_masuk');
+            $table->time('jam_masuk')->nullable();
             $table->time('jam_pulang')->nullable();
+            $table->enum('status', ['Masuk', 'Izin', 'Sakit', 'Alpa', 'Telat'])->default('Masuk');
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDepartemenRequest;
 use App\Http\Requests\UpdateDepartemenRequest;
 use App\Models\Departemen;
+use App\Models\karyawan;
 
 class DepartemenController extends Controller
 {
@@ -13,7 +14,15 @@ class DepartemenController extends Controller
      */
     public function index()
     {
-        //
+        $departemens = Departemen::all();
+        $data['data'] = [];
+        foreach ($departemens as $departemen) {
+            $data['data'][] = [
+                'id' => $departemen->id,
+                'departemen' => $departemen->nama
+            ];
+        }
+        return inertia('departemen/index', $data);
     }
 
     /**
@@ -21,7 +30,8 @@ class DepartemenController extends Controller
      */
     public function create()
     {
-        //
+
+        return inertia('departemen/create');
     }
 
     /**
@@ -29,7 +39,12 @@ class DepartemenController extends Controller
      */
     public function store(StoreDepartemenRequest $request)
     {
-        //
+        // dd($request->all());
+        Departemen::create([
+            'nama' => $request->name
+        ]);
+
+        return route('kelolaDepartemen');
     }
 
     /**
@@ -37,7 +52,8 @@ class DepartemenController extends Controller
      */
     public function show(Departemen $departemen)
     {
-        //
+        $data['departemen'] = $departemen;
+        return inertia('departemen/show', $data);
     }
 
     /**
@@ -45,7 +61,7 @@ class DepartemenController extends Controller
      */
     public function edit(Departemen $departemen)
     {
-        //
+    //
     }
 
     /**
@@ -53,14 +69,26 @@ class DepartemenController extends Controller
      */
     public function update(UpdateDepartemenRequest $request, Departemen $departemen)
     {
-        //
+        // dd($departemen);
+        $departemen->nama = $request->name;
+        $departemen->save();
+        return route('kelolaDepartemen');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Departemen $departemen)
+    public function destroy($id)
     {
-        //
+        $departemen = Departemen::find($id);
+        // dd($departemen);
+        $departemens = karyawan::where('departemen_id', $departemen->id)->count();
+
+        if ($departemens > 0) {
+            return;
+        }
+        $departemen->delete();
+        // dd($departemen);
+        return route('kelolaDepartemen');
     }
 }

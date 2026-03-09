@@ -22,10 +22,11 @@ export default function KaryawanShow({ karyawan, departemen, jabatan, selectDepa
     const [employeeName, setEmployeeName] = useState<string>(karyawan.nama);
     const [employeeDepartemen, setEmployeeDepartemen] = useState<string>(departemen.nama);
     const [employeeJabatan, setEmployeeJabatan] = useState<string>(jabatan.nama)
-    { console.log(departemen) }
+    // { console.log(departemen) }
+    // console.log(karyawan.karyawan.nama);
 
 
-    const test = 'HRD';
+    // const test = 'HRD';
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={karyawan.nama} />
@@ -38,7 +39,7 @@ export default function KaryawanShow({ karyawan, departemen, jabatan, selectDepa
                     </div>
                     <div className="px-10">
                         <Form
-                            {...update.form.put(karyawan.id)}
+                            {...update.put(karyawan)}
                         >
                             <div className="grid h-48 grid-cols-2 place-content-between gap-4 ">
 

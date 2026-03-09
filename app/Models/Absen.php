@@ -9,4 +9,17 @@ class Absen extends Model
 {
     /** @use HasFactory<\Database\Factories\AbsenFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'karyawan_id',
+        'tanggal',
+        'jam_masuk',
+        'jam_pulang',
+        'status',
+    ];
+
+    public function karyawan()
+    {
+        return $this->belongsTo(Karyawan::class);
+    }
 }

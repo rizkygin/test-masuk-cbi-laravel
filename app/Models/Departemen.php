@@ -10,6 +10,7 @@ class Departemen extends Model
     /** @use HasFactory<\Database\Factories\DepartemenFactory> */
     use HasFactory;
 
+    protected $table = 'departemens';
     protected $fillable = [
         'nama'
     ];

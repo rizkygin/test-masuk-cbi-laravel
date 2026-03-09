@@ -13,6 +13,6 @@ class KaryawanSeeder extends Seeder
      */
     public function run(): void
     {
-
+    // karyawan::factory()->count(10)->create();
     }
 }

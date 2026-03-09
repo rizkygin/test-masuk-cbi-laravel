@@ -2,6 +2,7 @@
 
 use App\Models\Departemen;
 use App\Models\Jabatan;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,7 @@ return new class extends Migration {
             $table->string('nama');
             $table->foreignIdFor(Departemen::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Jabatan::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

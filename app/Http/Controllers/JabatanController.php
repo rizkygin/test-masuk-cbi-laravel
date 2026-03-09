@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreJabatanRequest;
 use App\Http\Requests\UpdateJabatanRequest;
 use App\Models\Jabatan;
+use App\Models\karyawan;
 
 class JabatanController extends Controller
 {
@@ -13,7 +14,15 @@ class JabatanController extends Controller
      */
     public function index()
     {
-        //
+        $data['jabatans'] = Jabatan::all();
+        $data['data'] = [];
+        foreach ($data['jabatans'] as $jabatan) {
+            $data['data'][] = [
+                'id' => $jabatan->id,
+                'jabatan' => $jabatan->nama,
+            ];
+        }
+        return inertia('jabatan/index', $data);
     }
 
     /**
@@ -21,7 +30,9 @@ class JabatanController extends Controller
      */
     public function create()
     {
-        //
+
+        return inertia('jabatan/create');
+
     }
 
     /**
@@ -29,7 +40,10 @@ class JabatanController extends Controller
      */
     public function store(StoreJabatanRequest $request)
     {
-        //
+        Jabatan::create([
+            'nama' => $request->name
+        ]);
+        return route('kelolaJabatan');
     }
 
     /**
@@ -37,7 +51,9 @@ class JabatanController extends Controller
      */
     public function show(Jabatan $jabatan)
     {
-        //
+        $data['data'] = $jabatan;
+        return inertia('jabatan/show', $data);
+
     }
 
     /**
@@ -45,7 +61,7 @@ class JabatanController extends Controller
      */
     public function edit(Jabatan $jabatan)
     {
-        //
+    //
     }
 
     /**
@@ -53,14 +69,22 @@ class JabatanController extends Controller
      */
     public function update(UpdateJabatanRequest $request, Jabatan $jabatan)
     {
-        //
+        $jabatan->nama = $request->name;
+        $jabatan->save();
+
+        return route('kelolaJabatan');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Jabatan $jabatan)
+    public function destroy($id)
     {
-        //
+        $jabatan = Jabatan::find($id);
+        if (karyawan::all()->where('jabatan_id', $id)->count() > 0) {
+            return;
+        }
+        $jabatan->delete();
+        return route('kelolaJabatan');
     }
 }

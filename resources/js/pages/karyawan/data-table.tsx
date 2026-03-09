@@ -30,7 +30,6 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
@@ -75,6 +74,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                     }
                     className="max-w-sm"
                 />
+
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="ml-auto">

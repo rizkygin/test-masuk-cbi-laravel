@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreIzinRequest;
 use App\Http\Requests\UpdateIzinRequest;
 use App\Models\Izin;
+use App\Models\Karyawan;
+use Illuminate\Support\Facades\Auth;
 
 class IzinController extends Controller
 {
@@ -13,7 +15,22 @@ class IzinController extends Controller
      */
     public function index()
     {
-        //
+
+        $karyawan = Auth()->user()->karyawan;
+        $data['izin'] = Izin::all()->where('karyawan_id', $karyawan->id);
+        // dd($data);
+        $returnData = [];
+
+        foreach ($data['izin'] as $izin) {
+            $returnData['izin'][] = [
+                'id' => $izin->id,
+                'tanggal' => $izin->tanggal,
+                'keterangan' => $izin->keterangan,
+                'status' => $izin->status,
+                'disetujui_oleh' => $izin->disetujui_oleh
+            ];
+        }
+        return inertia('izin/index', $returnData);
     }
 
     /**
@@ -21,7 +38,8 @@ class IzinController extends Controller
      */
     public function create()
     {
-        //
+        // $karyawan = Karyawan::all();
+        return inertia('izin/create');
     }
 
     /**
@@ -29,7 +47,19 @@ class IzinController extends Controller
      */
     public function store(StoreIzinRequest $request)
     {
-        //
+        // dd($request->all());
+        // $izin = Izin::create($request->all());
+        $karyawan = Auth()->user()->karyawan;
+        $izin = Izin::create([
+            'karyawan_id' => $karyawan->id,
+            'keterangan' => $request->jenis_izin,
+            'tanggal' => $request->tanggal,
+            'alasan' => $request->alasan,
+        ]);
+
+        return redirect()->route('izinTidakMasukCreate');
+    // return inertia('izin/create');
+
     }
 
     /**
@@ -37,7 +67,7 @@ class IzinController extends Controller
      */
     public function show(Izin $izin)
     {
-        //
+    //
     }
 
     /**
@@ -45,7 +75,7 @@ class IzinController extends Controller
      */
     public function edit(Izin $izin)
     {
-        //
+    //
     }
 
     /**
@@ -53,7 +83,11 @@ class IzinController extends Controller
      */
     public function update(UpdateIzinRequest $request, Izin $izin)
     {
-        //
+        $izin->disetujui_oleh = Auth()->user()->karyawan->id;
+        $izin->status = $request->status;
+        $izin->save();
+        $data['session'] = "Success Diberikan Izin";
+        return inertia('dashboard/index', $data)->with('session', $data['session']);
     }
 
     /**
@@ -61,6 +95,6 @@ class IzinController extends Controller
      */
     public function destroy(Izin $izin)
     {
-        //
+    //
     }
 }

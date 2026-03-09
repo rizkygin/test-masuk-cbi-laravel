@@ -17,7 +17,11 @@ class AbsenFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'karyawan_id' => fake()->numberBetween(1, 100),
+            'tanggal' => fake()->date(),
+            'jam_masuk' => fake()->time(),
+            'jam_pulang' => fake()->time(),
+            'status' => fake()->randomElement(['Masuk', 'Izin', 'Sakit', 'Alpa']),
         ];
     }
 }

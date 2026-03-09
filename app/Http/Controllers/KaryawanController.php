@@ -35,7 +35,11 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-    //
+        // dd('hai');
+        $data['selectDepartemen'] = Departemen::all();
+        $data['selectJabatan'] = Jabatan::all();
+
+        return inertia('karyawan/create', $data);
     }
 
     /**
@@ -43,25 +47,34 @@ class KaryawanController extends Controller
      */
     public function store(StorekaryawanRequest $request)
     {
-    //
+
+        $karyawan = karyawan::create([
+            'nama' => $request->nama,
+            'departemen_id' => $request->departemen,
+            'jabatan_id' => $request->jabatan
+        ]);
+
+        return redirect()->route('karyawan.show', $karyawan->id);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(karyawan $karyawan)
     {
-        // dd($id);
-        $karyawan = karyawan::find($id);
-        // $data['karyawan'] = karyawan::with('departemen', 'jabatan')->get()->where('id', $id);
+        // dd($karyawan);
+        // $karyawan = karyawan::find($karyawan);
+        // dd($karyawan);?
+        // $data['karyawan'] = karyawan::with('departemen', 'jabatan')->get()->where('id', $karyawan->id);
         $data['karyawan'] = $karyawan;
+        // dd($data['karyawan']);
         $data['departemen'] = $karyawan->departemen;
         $data['jabatan'] = $karyawan->jabatan;
 
         $data['selectDepartemen'] = Departemen::all();
         $data['selectJabatan'] = Jabatan::all();
 
-        // dd($data['jabatan']);
+        // dd($data['departemen']);
         return inertia('karyawan/show', $data);
     }
 
@@ -76,11 +89,12 @@ class KaryawanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatekaryawanRequest $request, $id)
+    public function update(UpdatekaryawanRequest $request, karyawan $karyawan)
     {
         // dd($request->all());
         // dd(karyawan::find($id));
-        $karyawan = karyawan::find($id);
+        // $karyawan = karyawan::find($id);
+        // dd($karyawan);
 
         $karyawan->nama = $request->nama;
         $karyawan->jabatan_id = $request->jabatan;
@@ -88,7 +102,7 @@ class KaryawanController extends Controller
 
         // dd($karyawan);
         $karyawan->save();
-        return $this->show($id);
+        return $this->show($karyawan);
     }
 
     /**
@@ -97,7 +111,6 @@ class KaryawanController extends Controller
     public function destroy($id)
     {
         $karyawan = karyawan::find($id);
-        // return dd($karyawan);
         $karyawan->delete();
         return redirect('/karyawan')->with('status', 'success');
     }

@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('alasan');
             $table->text('keterangan');
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
-            $table->foreignId('disetujui_oleh');
+            $table->foreignId('disetujui_oleh')->nullable();
             $table->timestamps();
         });
     }

@@ -21,6 +21,9 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
         ]);
+        $middleware->alias([
+            'employee_reguler' => \App\Http\Middleware\EmployeeReguler::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

@@ -17,11 +17,8 @@ type Props = {
     canRegister: boolean;
 };
 
-export default function Login({
-    status,
-    canResetPassword,
-    canRegister,
-}: Props) {
+export default function Login({ status, canResetPassword, canRegister }: Props) {
+    console.log(status, canResetPassword, canRegister);
     return (
         <AuthLayout
             title="Log in to your account"
@@ -30,7 +27,7 @@ export default function Login({
             <Head title="Log in" />
 
             <Form
-                {...store.form()}
+                action={store()}
                 resetOnSuccess={['password']}
                 className="flex flex-col gap-6"
             >

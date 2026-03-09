@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreJabatanRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreJabatanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth()->user()->role === 'admin';
     }
 
     /**
@@ -22,7 +23,7 @@ class StoreJabatanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required'
         ];
     }
 }

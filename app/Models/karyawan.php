@@ -13,8 +13,13 @@ class karyawan extends Model
     /** @use HasFactory<\Database\Factories\KaryawanFactory> */
     use HasFactory;
 
+    protected $table = 'karyawans';
+
     protected $fillable = [
         'nama',
+        'jabatan_id',
+        'departemen_id',
+        'user_id'
     ];
 
     public function departemen(): BelongsTo

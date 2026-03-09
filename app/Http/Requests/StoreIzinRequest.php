@@ -11,7 +11,7 @@ class StoreIzinRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreIzinRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'jenis_izin' => 'required',
+            'tanggal' => 'required',
+            'alasan' => 'required',
         ];
     }
 }

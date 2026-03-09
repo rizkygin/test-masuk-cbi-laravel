@@ -24,7 +24,34 @@ class DatabaseSeeder extends Seeder
             JabatanSeeder::class ,
 
         ]);
-        User::factory()->count(10)->create();
+        // User::factory()->count(10)->create();
+        $admin = User::create([
+            'name' => 'Rizky Kurniawan',
+            'email' => 'programmer@da',
+            'password' => '12345678',
+            'role' => 'admin',
+            'email_verified_at' => now(),
+        ]);
+        karyawan::create([
+            'nama' => 'Rizky Kurniawan',
+            'jabatan_id' => 1,
+            'departemen_id' => 1,
+            'user_id' => $admin->id,
+        ]);
+        $karyawan2 = User::create([
+            'name' => 'Rizky Kurniawan',
+            'email' => 'programmer2@da',
+            'password' => '12345678',
+            'role' => 'employee_reguler',
+            'email_verified_at' => now(),
+        ]);
+        karyawan::create([
+            'nama' => 'Rizky Kurniawan',
+            'jabatan_id' => 1,
+            'departemen_id' => 1,
+            'user_id' => $karyawan2->id,
+        ]);
+
         karyawan::factory()->count(100)->create();
 
     }

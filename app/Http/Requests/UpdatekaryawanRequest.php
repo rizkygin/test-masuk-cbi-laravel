@@ -12,8 +12,8 @@ class UpdatekaryawanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // dd(Auth()->user()->email);
-        return Auth()->user()->email === "rizkygin@gmail.com";
+
+        return Auth()->user()->email === "programmer@da";
     }
 
     /**
