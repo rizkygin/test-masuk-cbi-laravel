@@ -1,18 +1,13 @@
 ## Getting Started
-
-First, run the development server:
-
-```bash
-npm install
-
-npm run dev
-
+<img width="1552" height="987" alt="Screenshot 2026-03-10 at 11 18 37" src="https://github.com/user-attachments/assets/af769638-9713-4594-ab98-be0a39fea6a8" />
 ```
 
 Open [http://localhost:3000](http://localhost:3000)
 login with {email : 'programmer@da', password : 'Prog123!'}
 
-## Getting Started
+
+
+
 
 First, run the development server:
 
