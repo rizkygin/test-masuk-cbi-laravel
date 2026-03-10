@@ -2,10 +2,10 @@
 <img width="1552" height="987" alt="Screenshot 2026-03-10 at 11 18 37" src="https://github.com/user-attachments/assets/af769638-9713-4594-ab98-be0a39fea6a8" />
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
-login with {email : 'programmer@da', password : 'Prog123!'}
+```
+## Struktur database rancangan saya
 
-
+<img width="687" height="355" alt="Screenshot 2026-03-10 at 11 37 48" src="https://github.com/user-attachments/assets/f9d355b6-6133-4a62-aa36-5f4155f5e5a5" />
 
 
 
