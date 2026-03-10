@@ -11,7 +11,7 @@ class StorekaryawanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth()->user()->email === 'programmer@da';
+        return Auth()->user()->role === 'admin';
     }
 
     /**

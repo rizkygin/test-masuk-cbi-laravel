@@ -16,6 +16,7 @@ class DepartemenApiController extends Controller
     }
     public function show($id)
     {
+        // dd($id);
         $departemen = Departemen::find($id);
         return response()->json([
             'data' => $departemen
@@ -33,7 +34,10 @@ class DepartemenApiController extends Controller
     }
     public function update(Request $request, $id)
     {
+        // dd($id);
+
         $departemen = Departemen::find($id);
+
         if (!$departemen) {
             return response()->json([
                 'message' => 'Departemen Not Found'

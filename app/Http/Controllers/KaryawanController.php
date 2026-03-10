@@ -7,6 +7,8 @@ use App\Http\Requests\UpdatekaryawanRequest;
 use App\Models\Departemen;
 use App\Models\Jabatan;
 use App\Models\karyawan;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class KaryawanController extends Controller
 {
@@ -48,10 +50,17 @@ class KaryawanController extends Controller
     public function store(StorekaryawanRequest $request)
     {
 
+
+        $user = User::create([
+            'name' => $request->nama,
+            'email' => fake()->email,
+            'password' => Hash::make($request->password),
+        ]);
         $karyawan = karyawan::create([
             'nama' => $request->nama,
             'departemen_id' => $request->departemen,
-            'jabatan_id' => $request->jabatan
+            'jabatan_id' => $request->jabatan,
+            'user_id' => $user->id
         ]);
 
         return redirect()->route('karyawan.show', $karyawan->id);
